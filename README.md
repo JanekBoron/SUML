@@ -14,8 +14,11 @@ Przed uruchomieniem aplikacji upewnij się, że masz zainstalowanego Pythona i p
 ```bash
 # Jeśli używasz wirtualnego środowiska, aktywuj je najpierw
 # Jeśli nie, po prostu instaluj w systemie
-
-# Zainstaluj Streamlit
+Sklonuj repozytorium:  
+   ```bash
+   git clone https://github.com/twoje-repo/sleep-assistant.git
+   cd sleep-assistant
+# Zainstaluj Streamlit oraz python
 pip install streamlit
 
 2. Uruchomienie aplikacji
@@ -26,4 +29,4 @@ Aby uruchomić aplikację lokalnie, wykonaj następujące kroki:
 
     Wpisz poniższą komendę:
 
-streamlit run SimpleForm.py
+streamlit run app.py
