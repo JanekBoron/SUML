@@ -1,5 +1,5 @@
 "# SUML" 
-# Nazwa aplikacji: Streamlit Simple Form
+# Nazwa aplikacji: Inteligentny Asystent do Monitorowania Snu
 
 ## Opis aplikacji
 Aplikacja jest prostym interfejsem użytkownika zbudowanym w Streamlit, który umożliwia wprowadzenie danych przez formularz. Po naciśnięciu przycisku aplikacja wyświetli placeholder z komunikatem, takim jak "Wkrótce dostępne" lub losowym tekstem.
