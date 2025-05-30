@@ -37,4 +37,3 @@ if submitted and user_input.strip():
     st.write(answer)
 else:
     st.info("Wpisz coś i kliknij „Analizuj mój sen”.")
-
