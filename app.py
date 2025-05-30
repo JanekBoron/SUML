@@ -30,7 +30,7 @@ if submitted and user_input.strip():
                     {
                         "role": "system",
                         "content": (
-                            "Jesteś asystentem pomagającym poprawić jakość snu."
+                            "Jesteś asystentem pomagającym poprawić jakość snu"
                         ),
                     },
                     {"role": "user", "content": user_input},
