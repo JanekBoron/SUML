@@ -15,7 +15,7 @@ with st.form(key="sleep_form"):
     user_input = st.text_area(
         label=(
             "Opowiedz coś o swoim ostatnim śnie, nawykach lub "
-            "problemach ze snem:"
+            "problemach ze śnie."
         ),
         height=150,
     )
