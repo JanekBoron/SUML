@@ -3,6 +3,7 @@ name: CI – Unit Tests & Lint
 on:
   pull_request:
     branches:
+      - main
       - master
 
 jobs:
