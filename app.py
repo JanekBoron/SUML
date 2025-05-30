@@ -8,9 +8,9 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 st.set_page_config(page_title="Asystent Snu", layout="centered")
 
- st.title(
-     "Inteligentny Asystent do Monitorowania Snu"
- )
+st.title(
+	"Inteligentny Asystent do Monitorowania Snu"
+)
 
 with st.form(key="sleep_form"):
     user_input = st.text_area(
