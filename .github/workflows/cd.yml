@@ -1,7 +1,6 @@
 name: CD – Deploy to Azure
 
-# Wymagane uprawnienia do tokena OIDC
-top-level-permissions:
+permissions:
   id-token: write
   contents: read
 
