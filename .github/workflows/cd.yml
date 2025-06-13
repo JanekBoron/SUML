@@ -1,45 +1,51 @@
-name: CD
+name: CD – Deploy to Azure
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - master
 
 jobs:
   terraform:
+    name: Terraform – Provision Infrastructure
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Infra Code
+        uses: actions/checkout@v4
+        with:
+          path: infra
 
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Terraform Init & Apply
+      - name: Terraform Init
         working-directory: infra
-        run: |
-          terraform init
-          terraform apply -auto-approve
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: infra
+        run: terraform apply -auto-approve
         env:
-          ARM_CLIENT_ID:     ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_TENANT_ID:     ${{ secrets.AZURE_TENANT_ID }}
+          ARM_CLIENT_ID:       ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET:   ${{ secrets.AZURE_CLIENT_SECRET }}
+          ARM_TENANT_ID:       ${{ secrets.AZURE_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
   deploy:
+    name: Deploy App Container
     needs: terraform
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Container to Web App
+      - name: Configure Web App Container
         run: |
           az webapp config container set \
             --resource-group suml-rg \
             --name suml-webapp \
-            --docker-custom-image-name ${{ secrets.DOCKER_USERNAME }}/suml-app:latest
+            --docker-custom-image-name ${{ secrets.DOCKERHUB_USERNAME }}/asystent-snu:latest
