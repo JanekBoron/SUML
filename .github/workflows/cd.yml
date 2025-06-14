@@ -1,6 +1,6 @@
 name: CD – Deploy to Azure
 
-epermissions:
+permissions:
   id-token: write
   contents: read
 
