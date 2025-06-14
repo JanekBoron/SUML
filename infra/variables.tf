@@ -7,9 +7,9 @@ variable "prefix" {
 }
 
 variable "container_registry" {
-  description = "Adres registry, np. docker.io/TwojUser"
+  description = "docker.io/boronekziomek"
 }
 
 variable "image_name" {
-  default = "suml-app"
+  default = "asystent-snu"
 }
