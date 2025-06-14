@@ -1,2 +1,2 @@
 prefix             = "suml"
-container_registry = "docker.io/TwojUser"
+container_registry = "docker.io/boronekziomek"
