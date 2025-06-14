@@ -1,0 +1,7 @@
+streamlit
+openai
+python-dotenv
+openai==0.28.0
+flask
+azure-identity
+azure-storage-blob

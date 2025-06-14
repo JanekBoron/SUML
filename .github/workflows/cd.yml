@@ -1,0 +1,65 @@
+name: CD – Deploy to Azure
+
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  terraform:
+    name: Terraform – Provision Infrastructure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Infra Code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6  
+
+      - name: Azure Login for Terraform
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Terraform Init
+        working-directory: infra
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: infra
+        run: terraform apply -auto-approve
+        env:
+            TF_VAR_container_registry:  ${{ secrets.CONTAINER_REGISTRY }}
+  	    TF_VAR_image_name:          ${{ secrets.IMAGE_NAME }}
+ 	    TF_VAR_docker_image_tag:    ${{ secrets.DOCKER_IMAGE_TAG }}
+  	    TF_VAR_registry_username:   ${{ secrets.REGISTRY_USERNAME }}
+  	    TF_VAR_registry_password:   ${{ secrets.REGISTRY_PASSWORD }}
+ 	    TF_VAR_client_id:           ${{ secrets.AZURE_CLIENT_ID }}
+ 	    TF_VAR_client_secret:       ${{ secrets.AZURE_CLIENT_SECRET }}
+  	    TF_VAR_tenant_id:           ${{ secrets.AZURE_TENANT_ID }}
+  	    TF_VAR_subscription_id:     ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+  deploy:
+    name: Deploy App Container
+    needs: terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure Login for Deployment
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+
+
+      - name: Configure Web App Container
+        run: |
+          az webapp config container set \
+            --resource-group suml-rg \
+            --name suml-webapp \
+            --docker-custom-image-name ${{ secrets.DOCKERHUB_USERNAME }}/asystent-snu:latest
