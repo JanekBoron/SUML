@@ -35,12 +35,15 @@ jobs:
         working-directory: infra
         run: terraform apply -auto-approve
         env:
-          TF_VAR_client_id:       ${{ secrets.AZURE_CLIENT_ID }}
-          TF_VAR_client_secret:   ${{ secrets.AZURE_CLIENT_SECRET }}
-          TF_VAR_tenant_id:       ${{ secrets.AZURE_TENANT_ID }}
-          TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          TF_VAR_dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
-          TF_VAR_dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+            TF_VAR_container_registry:  ${{ secrets.CONTAINER_REGISTRY }}
+  	    TF_VAR_image_name:          ${{ secrets.IMAGE_NAME }}
+ 	    TF_VAR_docker_image_tag:    ${{ secrets.DOCKER_IMAGE_TAG }}
+  	    TF_VAR_registry_username:   ${{ secrets.REGISTRY_USERNAME }}
+  	    TF_VAR_registry_password:   ${{ secrets.REGISTRY_PASSWORD }}
+ 	    TF_VAR_client_id:           ${{ secrets.AZURE_CLIENT_ID }}
+ 	    TF_VAR_client_secret:       ${{ secrets.AZURE_CLIENT_SECRET }}
+  	    TF_VAR_tenant_id:           ${{ secrets.AZURE_TENANT_ID }}
+  	    TF_VAR_subscription_id:     ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
   deploy:
     name: Deploy App Container

@@ -1,55 +1,64 @@
 variable "location" {
-  default = "westeurope"
+  description = "Azure region"
+  default     = "westeurope"
 }
 
 variable "prefix" {
-  description = "Prefiks do nazewnictwa zasobów"
+  description = "Prefiks do nazw zasobów"
+  type        = string
 }
 
 variable "container_registry" {
-  description = "docker.io/boronekziomek"
+  description = "np. 'boronekziomek' dla DockerHub lub '<myacr>.azurecr.io' dla ACR"
+  type        = string
 }
 
 variable "image_name" {
-  default = "asystent-snu"
-}
-
-variable "docker_image" {
-  description = "Docker image for the Linux Web App"
+  description = "Nazwa obrazu (bez rejestru i taga), np. 'asystent-snu'"
   type        = string
-  default     = "boronekziomek/asystent-snu:latest"  
 }
 
+variable "docker_image_tag" {
+  description = "Tag obrazu, np. 'latest'"
+  type        = string
+  default     = "latest"
+}
 
 variable "subscription_id" {
-  type        = string
   description = "Azure Subscription ID"
+  type        = string
 }
 
 variable "client_id" {
-  type        = string
   description = "Azure Client ID"
+  type        = string
 }
 
 variable "client_secret" {
-  type        = string
   description = "Azure Client Secret"
+  type        = string
   sensitive   = true
 }
 
-
 variable "tenant_id" {
-  type        = string
   description = "Azure Tenant ID"
+  type        = string
 }
 
-variable "dockerhub_username" {
+# Jeżeli chcesz uwierzytelniać się do prywatnego rejestru DockerHub/ACR:
+#variable "registry_url" {
+#  description = "URL prywatnego rejestru, np. 'https://index.docker.io' lub 'https://<myacr>.azurecr.io'"
+#  type        = string
+#  default     = "https://index.docker.io"
+#}
+
+variable "registry_username" {
+  description = "Użytkownik rejestru Docker"
   type        = string
-  description = "Docker Hub Username"
 }
 
-variable "dockerhub_password" {
+variable "registry_password" {
+  description = "Hasło do rejestru Docker"
   type        = string
-  description = "Docker Hub Password"
   sensitive   = true
 }
