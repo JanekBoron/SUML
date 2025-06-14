@@ -13,3 +13,9 @@ variable "container_registry" {
 variable "image_name" {
   default = "asystent-snu"
 }
+
+variable "docker_image" {
+  description = "Docker image for the Linux Web App"
+  type        = string
+  default     = "boronekziomek/asystent-snu:latest"  
+}
