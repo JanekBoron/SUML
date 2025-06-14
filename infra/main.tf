@@ -8,7 +8,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg" {
   name     = "suml-rg"
-  location = "westeurope"
+  location = var.location
 }
 
 resource "azurerm_app_service_plan" "plan" {
@@ -31,12 +31,15 @@ resource "azurerm_linux_web_app" "app" {
   resource_group_name = azurerm_resource_group.rg.name
   service_plan_id     = azurerm_app_service_plan.plan.id
 
-  site_config {
-    linux_fx_version = "DOCKER|${var.docker_image}"
-  }
-
   app_settings = {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
   }
-}
 
+  container_settings {
+    image_name = var.docker_image
+
+     registry_url      = "index.docker.io"
+     registry_username = var.dockerhub_username
+     registry_password = var.dockerhub_password
+  }
+}

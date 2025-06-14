@@ -21,22 +21,35 @@ variable "docker_image" {
 }
 
 
-variable "tenant_id" {
-  description = "Azure Tenant ID"
+variable "subscription_id" {
   type        = string
+  description = "Azure Subscription ID"
 }
 
 variable "client_id" {
-  description = "Azure Client ID"
   type        = string
+  description = "Azure Client ID"
 }
 
 variable "client_secret" {
-  description = "Azure Client Secret"
   type        = string
+  description = "Azure Client Secret"
+  sensitive   = true
 }
 
-variable "subscription_id" {
-  description = "Azure Subscription ID"
+
+variable "tenant_id" {
   type        = string
+  description = "Azure Tenant ID"
+}
+
+variable "dockerhub_username" {
+  type        = string
+  description = "Docker Hub Username"
+}
+
+variable "dockerhub_password" {
+  type        = string
+  description = "Docker Hub Password"
+  sensitive   = true
 }
