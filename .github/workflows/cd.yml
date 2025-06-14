@@ -16,8 +16,6 @@ jobs:
     steps:
       - name: Checkout Infra Code
         uses: actions/checkout@v4
-        with:
-          path: infra
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
