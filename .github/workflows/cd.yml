@@ -31,11 +31,6 @@ jobs:
       - name: Terraform Apply
         working-directory: infra
         run: terraform apply -auto-approve
-        env:
-          ARM_CLIENT_ID:       ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET:   ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_TENANT_ID:       ${{ secrets.AZURE_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
   deploy:
     name: Deploy App Container
@@ -46,6 +41,8 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      
 
       - name: Configure Web App Container
         run: |
